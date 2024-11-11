@@ -26,6 +26,15 @@ class Men(HumanPrototype):
         return f"Прототип Мужчины с атрибутом: {self.attribute}"
 
 
+class Builder(Men):
+    def __init__(self, name, surname, attribute):
+        super().__init__(name, surname, attribute)
+        self.attribute = attribute
+
+    def build(self, obj):
+        print(f'{self} built {obj}')
+
+
 class Women(HumanPrototype):
     def __init__(self, name, surname, attribute):
         super().__init__(name, surname)
@@ -37,13 +46,17 @@ class Women(HumanPrototype):
 
 # Клиентский код
 if __name__ == "__main__":
+
     # Создаем экземпляры прототипов
     man_proto = Men("Иван", "Иванов", "Сильный очень")
     women_proto = Women("Анна", "Петрова", "Красивая дама")
+    builder = Builder('Строитель', "Коган", "Плохо строит")
 
     # Клонируем объекты
     clone_a = man_proto.clone()
     clone_b = women_proto.clone()
+    clone_builder = builder.clone()
+    print(clone_builder, clone_builder.name, clone_builder.surname)
     print(clone_a, clone_a.name, clone_a.surname)
     print(clone_b, clone_b.name, clone_b.surname)
 
